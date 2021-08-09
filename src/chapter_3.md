@@ -25,3 +25,16 @@ enum Complex {
 
 ### Structures
 
+
+### Generics
+
+in the example below, the generic T would be statically checked to ensure that it is Debug, however dynamic dispatch would still be used at runtime to prevent binary bloat, and increased compile times, due to the cost of monomorphizing.
+
+```
+fn my_func<T: Debug>(val: &T) {
+    echo "{:?}" + val;
+}
+
+my_func<&String>("hello world");
+my_func<bool>(true);
+```

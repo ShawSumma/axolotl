@@ -1,0 +1,14 @@
+# Motivations
+
+## Why I am writing this language spec
+Most scripting languages are vulernable to arbitrary code execution bugs as a result of fairly fixable issues of typing, principally most shell scripting languages such as ion, bash, sh, etc, treat everything as a string, including executable code. This presents a massive source of vulernabilities especially as people develop appliications, that grow progressively larger in these languages.
+
+Similarly because of the notion of everything is a string, it becomes increasingly more difficult to distinguish commands, and language specific functions, I am writing this spec to present a means of keeping such a destinction, and to build a strongly typed, highly performant shell scripting language, inspired by, rust, vale, and ion. 
+
+## Application Development in a Shell
+Languages such as python, and javascript are examples of scripting languages that are used for application development in mainstream environments, bash as well, however due to their nature as shell scripting languages they lack a lot of the facilities that make application development efficient, clean, and safe. Principally, strong typing, and clear structure.
+
+### An issue with purely dynamic typing
+there is a notion that a dynamically typed system will be easier to understand, especially for new programmers, However this tends to add background complexity that isn't accounted for. for example forgetting to check if a field exists on a javascript object, can massively increase the amount of work a new programmer has to put it, and can often deter people. 
+
+Of course languauges like C/C++ are often even worse with respect to having unforseen effects. java manages to do fairly well in this area as it is strongly typed, and doesn't tend to have unexpected consiquences, however it doesn't tend to foster the same kind of learning environment that a language such as C or rust does. While rust is great in many ways, the complexity of the borrow checker tends to make learning the language prohibitatively complex for some, which is why a lot of languages inspired by rust, seek to usue something like a garbage collector to solve this issue of learning curve, however that takes away of the most most special aspects of rust as a language. By using a simplified borrow checker that uses uni references (vale lang term), or references that can't be stored the complexity is greatly decreased while much of the performance, and memory efficiency is maintained. This also works well for teaching concepts such as the stack, as the structure of how these references can be used closely mirrors the formation of child stack frames.  

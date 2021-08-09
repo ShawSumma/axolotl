@@ -5,4 +5,7 @@
 - [Types](./chapter_3.md)
 - [Functions](./chapter_4.md)
 - [Commands](./chapter_5.md)
-- [General Example](./chapter_)
+- [Namespaces](./chapter_6.md)
+- [Package Management](./chapter_7.md)
+- [General Examples](./chapter_8.md)
+- [Motivations](./chapter_9.md)
