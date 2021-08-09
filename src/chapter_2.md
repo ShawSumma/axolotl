@@ -11,4 +11,4 @@ whenever an object goes out of scope its complete method is called, however no m
 
 ## Mutability
 
-rust's philosophy on mutability is used, principally that 
+rust's philosophy on mutability is used, principally that only one entity can have mutable access xor anyone can have immutable access. This is also the case for references, and aliases.
