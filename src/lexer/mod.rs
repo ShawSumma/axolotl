@@ -1,6 +1,7 @@
 pub mod local;
 pub mod token;
 use local::Location;
+use std::str::FromStr;
 use token::{Token, TokenStream};
 
 pub struct Lexer<T: Token, S: TokenStream<T>> {
