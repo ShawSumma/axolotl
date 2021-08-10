@@ -6,11 +6,21 @@ To start with the std error types of axolotl will support partial erroneous stat
 // panic handler signature
 
 struct Frame: pub {
+    file: String,
+    line: String,
     function: String,
-    args: Vec<Value>,
+    args: Array<Value>,
+    variables: Array<Value>,
 }
 
-fn handle(trace: StackTrace) {
+enum Continuation: pub {
+    Continue(u32),
+    Abort,
+}
+
+fn handle(trace: StackTrace) -> Continuation {
 
 }
 ```
+
+each stack frame in the trace will contain meta information on the variables within the scope of the function, including type id, and value, as well as the function name, which file its in, and what line number it is on. The variables will be writable so that execution, and the handler will return a Continuation enumeration as show above that indicates wether or not to continue execution, and if so, at what instruction to continue executing.

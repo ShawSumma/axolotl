@@ -1,2 +1,5 @@
 /target
 /book
+/parser/target
+/compiler/target
+/interpreter/target
