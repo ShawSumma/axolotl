@@ -15,16 +15,13 @@ Strings are a builtin type as axolotl is intended to be a higher level scripting
 Composit, or complex enumerations or enums are supported, for example
 
 ```rust
-enum Complex {
+enum Complex: pub {
     Str(String),
     Field1(u32),
     Field2,
     Field3
 }
 ```
-
-### Structures
-
 
 ### Generics
 

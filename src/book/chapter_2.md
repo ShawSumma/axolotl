@@ -9,6 +9,8 @@ Each function, and builtin command posses its own scope, there is also a global 
 ### Scope Termination
 whenever an object goes out of scope its complete method is called, however no memory management needs to be performed in the complete method, as each scope is operated as an arena, and can thus be block deallocated once each complete method is called. The complete methods exist not as a means of mamnaging memory but as a way to close file descriptors.
 
+The block deallocation is done by allocating in an arena. This is designed as a means of optimizing the efficiency of memory usage, will still allowing for the possibility for higher level allocators to run on top of the memory allocated to the scope. For example, if some objects aren't needed earlier, it could be possible to run a garbage collector, or generational memory management system, though not nessisary.
+
 ## Mutability
 
 rust's philosophy on mutability is used, principally that only one entity can have mutable access xor anyone can have immutable access. This is also the case for references, and aliases.

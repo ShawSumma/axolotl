@@ -70,7 +70,7 @@ impl Token for AxolotlToken {
 
     // damn string literal escapes are annoying
     fn splitters() -> Vec<Self::Matcher> {
-        vec![" ", "\n", ";", "{", "}", "[", "]", "\""]
+        vec![" ", "\n", ";"]
     }
 
     fn from_str(value: &str, start: Coordinate, end: Coordinate) -> Self {

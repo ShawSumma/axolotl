@@ -1,0 +1,3 @@
+# Interpreter
+
+The interpreter will be the initial implementation of the language. This is for the pruposes of minimal dependencies, and the interpreter will be easier to implement in the short term as a proof of concept. It is however important to note, that in the definition of the abstract syntax tree, and this language spec, both the compiler and interpreter backend must implement the same semantic functionality. 
