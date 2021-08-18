@@ -1,0 +1,29 @@
+interface Display pub {
+    fn display(self: &impl Display) -> str;
+}
+
+interface Debug pub {
+    fn debug() -> str;
+}
+
+struct Table pub {
+    data: Array<Array<str>>,
+    width: usize,
+    height: usize,
+}
+
+interface TableFmt: pub {
+    fn fmt_table(self: &impl TableFmt) -> Table;
+}
+/// defines of a means of converting into a string
+interface Serialize pub {
+    fn serialize_struct(self: &impl Serialize);
+}
+
+let ip = $(ip addr show | grep -w inet)
+let ip = |vals: Array<str>| {
+
+};
+
+/// if in an executable in struction > should be treated as redirect
+/// otherwise its comparison

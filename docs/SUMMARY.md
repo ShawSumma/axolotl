@@ -14,6 +14,7 @@
   - [Axolotl Errors](./book/errors/axolotl.md)
 - [Commands](./book/chapter_5.md)
 - [Namespaces](./book/chapter_6.md)
+- [Bare Metal](./book/metal.md)
 - [Package Management](./book/chapter_7.md)
 - [General Examples](./book/chapter_8.md)
 - [Motivations](./book/chapter_9.md)

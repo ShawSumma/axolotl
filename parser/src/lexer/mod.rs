@@ -1,26 +1,93 @@
-pub mod local;
-pub mod token;
-use local::Location;
-use std::str::FromStr;
-use token::{Token, TokenStream};
+use logos::Logos;
 
-pub struct Lexer<T: Token, S: TokenStream<T>> {
-    tokens: Vec<&'static str>,
-    data: String,
-    stream: S,
-    phantom: std::marker::PhantomData<T>,
+pub struct Location {
+    filename: String,
+    line: u16,
+    col: u16,
 }
 
-impl<T: Token, S: TokenStream<T>> Lexer<T, S> {
-    pub fn new(data: String, tokens: Vec<&'static str>) -> Self {
-        Self {
-            data,
-            tokens,
-            stream: S::default(),
-            phantom: std::marker::PhantomData::default(),
-        }
+#[derive(Logos, Debug, Clone, PartialEq)]
+pub enum TokenType<'a> {
+    #[token(":")]
+    TypeAnnotation,
+    #[token("::")]
+    NameSpaceOp,
+    #[token("{")]
+    StartBlock,
+    #[token("}")]
+    EndBlock,
+    #[token(" ")]
+    Space,
+    #[token("||")]
+    LogicalOr,
+    #[token("|")]
+    Pipe,
+    #[token("&&")]
+    LogicalAnd,
+    #[token(";")]
+    SemiColon,
+    #[token("struct")]
+    StructDecl,
+    #[token("enum")]
+    EnumDecl,
+    #[token("interface")]
+    InterfaceDecl,
+    #[token("fn")]
+    FnDecl,
+    #[token("==")]
+    EqualityOp,
+    #[token("<=")]
+    LessOrEq,
+    #[token(">=")]
+    GreatOrEq,
+    #[token("<")]
+    LessThan,
+    #[token(">")]
+    GreaterThan,
+    #[token("=")]
+    Assignment,
+    #[regex("[a-zA-Z]+")]
+    Text(&'a str),
+    #[regex("[0-9]+")]
+    Numeric,
+    #[error]
+    #[regex(r"[ \t\n\f]+", logos::skip)]
+    WhiteSpace,
+    #[token("//")]
+    OneLineComment,
+    #[token("///")]
+    DocComment,
+    #[token("/*")]
+    MultiLineStart,
+    #[token("*/")]
+    MultiLineEnd,
+    #[token("/*!")]
+    MultiLineDocStart,
+    #[token("!*/")]
+    MultiLineDocEnd,
+    #[token("(")]
+    OpenParen,
+    #[token(")")]
+    CloseParen,
+    #[token("&")]
+    AndSymbol,
+    #[token(",")]
+    Comma,
+    #[token("#")]
+    HashTag,
+    #[token("[")]
+    OpenBracket,
+    #[token("]")]
+    CloseBracket,
+}
+
+#[test]
+fn lex_file() {
+    let value = include_str!("example.axol");
+    println!("value: {}", value);
+    let mut lexer = TokenType::lexer(value);
+    for token in lexer {
+        println!("TokenType: {:?}", token);
     }
-    pub fn into_stream(self) -> S {
-        todo!()
-    }
+    panic!();
 }
