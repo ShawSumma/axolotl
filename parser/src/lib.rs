@@ -5,9 +5,9 @@ extern crate serde_derive;
 extern crate err_derive;
 pub mod lexer;
 
+use crate::lexer::Location;
 use std::collections::HashMap;
 use std::string::ToString;
-use crate::lexer::Location;
 
 #[derive(Debug, Clone, Error)]
 pub enum ParseError {
@@ -19,7 +19,7 @@ pub enum ParseError {
 pub struct StructRef {
     name: String,
     fields: HashMap<String, Value>,
-    funcs: HashMap<String, FunctionRef>
+    funcs: HashMap<String, FunctionRef>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -123,30 +123,14 @@ pub struct Parser {
 pub struct TokenStream;
 
 impl Parser {
-    pub fn parse_structt(&self, start: &Location, s: &str) -> Result<StructRef, ParseError> {
+    pub fn parse_struct(&self, start: &Location, s: &str) -> Result<StructRef, ParseError> {
         todo!()
     }
     pub fn parse_enum(s: &str) -> Result<EnumRef, ParseError> {
         todo!()
     }
-    /// returns an error if either '{' or '}' isn't found
-    /// returns the error with the string inside, but should return a Location
-    /*fn isolate_block(&self, s: &str, start: &Location) -> Result<String, ParseError> {
-        let start = if let Some(start) = s.find('{') {
-            start
-        }else{
-            return Err(ParseError::MissingCurly(s.to_string()));
-        };
-        let end = if let Some(end) = s.find('}') {
-
-        }else{
-            return Err(ParseError::MissingCloseCurly(s.to_string()))
-        };
-    }*/
 
     pub fn parse(&mut self) -> Result<TokenStream, ParseError> {
-
-
         Ok(TokenStream)
     }
 

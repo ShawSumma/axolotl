@@ -9,6 +9,7 @@
   - [Structures](./book/types/structs.md)
   - [Enumerations](./book/types/enums.md)
 - [Functions](./book/chapter_4.md)
+  - [Compile Time Functions](./book/comp_time.md)
 - [Regenerative Errors](./book/regen.md)
   - [Rust Results](./book/errors/rust.md)
   - [Axolotl Errors](./book/errors/axolotl.md)
