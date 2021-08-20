@@ -8,7 +8,7 @@ pub enum LocParseErr {
     #[error(display = "failed to get column number")]
     FailedToGetCol,
     #[error(display = "failed to get line number")]
-    FailedToGetLine
+    FailedToGetLine,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -80,7 +80,7 @@ pub struct Coordinate {
 }
 
 impl Coordinate {
-    pub fn newline(mut self, lines: usize) -> Coordinate{
+    pub fn newline(mut self, lines: usize) -> Coordinate {
         self.line += lines;
         self.col = 0;
         self
@@ -159,7 +159,7 @@ impl<'de> Visitor<'de> for CoordVisitor {
     {
         match Coordinate::from_str(s) {
             Ok(s) => Ok(s),
-            Err(e) => Err(de::Error::custom(e))
+            Err(e) => Err(de::Error::custom(e)),
         }
     }
 }

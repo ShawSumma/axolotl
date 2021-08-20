@@ -90,8 +90,10 @@ pub enum TokenType {
     CloseBracket,
     #[token("$(")]
     CommandRedirect,
-    #[token("$")]
-    VariableAccess,
+    #[token("\"")]
+    Quote,
+    #[token("f\"")]
+    FormatQuote,
     #[token("->")]
     RetIndicator,
     #[token("#!")]
@@ -108,12 +110,24 @@ pub enum TokenType {
     ElseDecl,
     #[token("import")]
     ImportDecl,
+    #[token("while")]
+    WhileLoop,
     #[token("for")]
     ForLoop,
     #[token("..")]
     Range,
+    #[token("let")]
+    LetBinding,
+    #[token("ret")]
+    ReturnStatement,
+    /// yield a value from a generator/coroutine, any type following
+    /// this keyword must be send.
+    #[token("yield")]
+    Yield,
+    /// unlike rust closures are by default move, not by default borrow
+    #[token("borrow")]
+    BorrowClosure
 }
-
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Token<'a> {
@@ -134,7 +148,7 @@ impl<'a> Token<'a> {
     }
 }
 
-#[derive(Debug)[]
+#[derive(Debug)]
 pub struct AxolotlLexer<'a> {
     literal: &'a str,
     filename: String,
@@ -154,26 +168,24 @@ impl<'a> AxolotlLexer<'a> {
         tempself.create_tokens(TokenType::lexer(literal))
     }
     fn create_tokens(mut self, lexer: logos::Lexer<'a, TokenType>) -> Self {
-        let mut start: Coordinate = Coordinate {line: 1, col: 0};
+        let mut start: Coordinate = Coordinate { line: 1, col: 0 };
         //let mut list = LinkedList::new();
         for (token, span) in lexer.spanned() {
-            let end = Coordinate{ line: start.line, col: start.col + (span.end - span.start)};
-            self.tokens.push_back(Token::new(
-                token,
-                start,
-                end,
-                &self.literal[span.clone()]
-            ));
-            if token == TokenType::NewLine{
+            let end = Coordinate {
+                line: start.line,
+                col: start.col + (span.end - span.start),
+            };
+            self.tokens
+                .push_back(Token::new(token, start, end, &self.literal[span.clone()]));
+            if token == TokenType::NewLine {
                 start = start.newline(1);
-            }else if token == TokenType::EmptyLine {
+            } else if token == TokenType::EmptyLine {
                 start = start.newline(2);
-            }else if token == TokenType::TwoEmpty {
+            } else if token == TokenType::TwoEmpty {
                 start = start.newline(3);
-            }else if token == TokenType::ThreeEmpty {
+            } else if token == TokenType::ThreeEmpty {
                 start = start.newline(4);
-            }
-            else{
+            } else {
                 start += (span.end - span.start);
             }
         }

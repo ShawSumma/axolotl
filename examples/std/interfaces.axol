@@ -1,0 +1,33 @@
+interface Add<T, O = Self>: pub {
+    func add(self: impl Add<T>, other: T) -> O;
+}
+
+interface Sub<T, O = Self>: pub {
+    func sub(self: impl Sub<T>, other: T) -> O; 
+}
+
+interface Div<T, O = Self>: pub {
+    func div(self: impl Div<T>, other: T) -> O;
+}
+
+interface Mul<T, O = Self>: pub {
+    func mul(self: impl Div<T>, other: T) -> O;
+}
+
+/// this is an example implementation, this would be performed
+/// by an assembly instruction in real life
+///'''
+/// impl Add<u16, u16> for u16;
+/// fn add(self: u16, other: u16) -> u16 {}
+///'''
+
+struct MyStruct: pub {
+    field1: str,
+    field2: str,
+    field3: f64,
+}
+
+func show_mystruct(self: &MyStruct) {
+    echo f"field3: {self.field3}\n field2: {self.field2}\n field1: {self.field1}";
+}
+

@@ -18,3 +18,6 @@ fn assoc_method(object: MyStruct) -> &String {
 ### Explanation
 
 axolotl structures syntax is very similar to rust structs, however some key differences exist, principally the publicity modifier comes after the struct keyword, but before the curly braces, this is done for the sake of simplicity, and consistency. by putting the struct keyword first, it becomes easier to use regex to find structs. (Search the beging of each line for a struct keyword) the other large differences are how associated methods are determined. In rsut an associated function is determined by the existence of the keywords, &self, self, and &mut self, in axolotl however, like in vale, associated functions are determined by the first type that appears in the type signature, as shown above.
+
+### Layout
+Structures are layed out in order of decreasing field size, from largest to smallest, this is to minimize extra memory given over to padding. 
